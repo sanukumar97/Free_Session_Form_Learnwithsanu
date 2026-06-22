@@ -1,0 +1,49 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ECEFFE;
+  --foreground: #0D0F2B;
+  --card: #ffffff;
+  --card-foreground: #0D0F2B;
+  --popover: #ffffff;
+  --popover-foreground: #0D0F2B;
+  --primary: #132BFC;
+  --primary-foreground: #ffffff;
+  --secondary: #EEF0FF;
+  --secondary-foreground: #132BFC;
+  --muted: #F4F5FF;
+  --muted-foreground: #6B7280;
+  --accent: #132BFC;
+  --accent-foreground: #ffffff;
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(19, 43, 252, 0.1);
+  --input: transparent;
+  --input-background: #ffffff;
+  --ring: #132BFC;
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
+  html { font-size: var(--font-size); }
+}
