@@ -148,11 +148,14 @@ function StepPersonal({ form, errors, update, banner }: {
 }
 
 // ── Step 1: Session Type ───────────────────────────────────────────────────────
-function StepPlan({ form, errors, update, plans }: {
+const DEFAULT_SESSION_NOTE = "Default session is 10 minutes. Extend to 12 minutes by sharing a short video review, or extend to 20 minutes by sharing a short video review & subscribing to our YouTube channel for IITJ & IITH preparation updates.";
+
+function StepPlan({ form, errors, update, plans, sessionNote }: {
   form: FreeFormData;
   errors: Partial<Record<keyof FreeFormData, string>>;
   update: (f: keyof FreeFormData, v: string) => void;
   plans: FreePlan[];
+  sessionNote?: string | null;
 }) {
   const planDescriptions: Record<string, string> = {
     "free-10": "Default session duration",
@@ -188,7 +191,13 @@ function StepPlan({ form, errors, update, plans }: {
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-base" style={{ color: "#0D0F2B" }}>{plan.name}</p>
+                  <div className="flex items-center flex-wrap gap-2">
+                    <p className="font-bold text-base" style={{ color: "#0D0F2B" }}>{plan.name}</p>
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                      style={{ background: "rgba(5,150,105,0.1)", color: "#059669", border: "1px solid rgba(5,150,105,0.25)" }}>
+                      {plan.id}
+                    </span>
+                  </div>
                   <p className="text-sm mt-0.5" style={{ color: "#6B7280" }}>{desc}</p>
                 </div>
                 {plan.id === "free-10" && (
@@ -210,9 +219,7 @@ function StepPlan({ form, errors, update, plans }: {
       <div className="rounded-xl px-4 py-3 text-xs leading-relaxed"
         style={{ background: "#FFF8E6", color: "#92620A", border: "1px solid #FFE4A0" }}>
         <span className="font-semibold">📌 Note: </span>
-        Default session is 10 minutes. Extend to 12 minutes by sharing a short video review,
-        or extend to 20 minutes by sharing a short video review &amp; subscribing to our YouTube
-        channel for IITJ &amp; IITH preparation updates.
+        {sessionNote?.trim() || DEFAULT_SESSION_NOTE}
       </div>
     </div>
   );
@@ -546,7 +553,7 @@ export function FreeEnrollmentForm() {
               initial="enter" animate="center" exit="exit"
               transition={{ duration: 0.18, ease: "easeOut" }}>
               {step === 0 && <StepPersonal form={form} errors={errors} update={update} banner={banner} />}
-              {step === 1 && <StepPlan form={form} errors={errors} update={update} plans={plans} />}
+              {step === 1 && <StepPlan form={form} errors={errors} update={update} plans={plans} sessionNote={banner?.session_note} />}
               {step === 2 && (
                 <StepDetails
                   form={form} errors={errors}
