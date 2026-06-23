@@ -515,7 +515,7 @@ export function FreeEnrollmentForm() {
       }}>
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-3 py-3">
-            <img src="/logo_for_form .png" alt="LearnWithSanu"
+            <img src="/logo_for_form.png" alt="LearnWithSanu"
               style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <div className="ml-auto shrink-0 text-xs font-bold px-3 py-1.5 rounded-full"
               style={{ background: PRIMARY, color: "white" }}>
